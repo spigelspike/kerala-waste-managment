@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kerala Waste Collection - Request Service</title>
+  <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    :root {
+      --primary: #0d9488;
+      --primary-dark: #0f766e;
+      --secondary: #84cc16;
+      --light: #f8fafc;
+      --dark: #1e293b;
+      --accent: #f59e0b;
+      --gray: #64748b;
+      --error: #ef4444;
+      --success: #22c55e;
+      --sidebar-bg: #407f60;
+      --sidebar-accent: #ffce00;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      transition: all 0.35s linear;
+      font-family: 'Barlow', sans-serif;
+    }
+
+    body {
+      background-color: #f0f9ff;
+      color: var(--dark);
+      display: flex;
+      min-height: 100vh;
+    }
+
+   /* Sidebar Styles */
+/* Sidebar Styles */
+aside {
+  background-color: var(--sidebar-bg);
+  color: white;
+  width: 16rem;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+  position: fixed;
+  transition: width 0.25s linear;
+  z-index: 100;
+  overflow: hidden;
+}
+
+.sidebar-toggle {
+  background-color: transparent;
+  border: none;
+  height: 4rem;
+  width: 4rem;
+  font-size: 1.25rem;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  margin-bottom: 1rem;
+}
+
+.sidebar-toggle:hover {
+  background-color: var(--sidebar-accent);
+  color: #242424;
+}
+
+.sidebar-menu {
+  flex-grow: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.3) transparent;
+}
+
+.sidebar-menu::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar-menu::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar-menu::-webkit-scrollbar-thumb {
+  background-color: rgba(255,255,255,0.3);
+  border-radius: 3px;
+}
+
+.sidebar-menu ul {
+  list-style: none;
+  padding-right: 10px;
+}
+
+.sidebar-menu ul li {
+  border-radius: 0.5rem;
+  cursor: pointer;
+  margin-block: 0.25rem;
+  transition: all 0.2s linear;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.sidebar-menu ul li a {
+  display: grid;
+  grid-template-columns: 4rem 1fr;
+  text-decoration: none;
+  color: inherit;
+}
+
+.sidebar-menu ul li.active,
+.sidebar-menu ul li:hover {
+  background-color: var(--sidebar-accent);
+  color: #000;
+}
+
+.sidebar-menu ul li a.active {
+  background-color: var(--sidebar-accent);
+  color: #000;
+}
+
+.sidebar-menu ul li i {
+  width: 4rem;
+  height: 3.5rem;
+  font-size: 1.25rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sidebar-menu ul li label {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 0.5rem;
+  cursor: pointer;
+}
+
+/* Minimized Sidebar Styles */
+.sidebar-mini {
+  width: 4rem;
+}
+
+.sidebar-mini .sidebar-menu {
+  overflow: hidden;
+}
+
+.sidebar-mini .sidebar-menu ul li {
+  width: 4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.sidebar-mini .sidebar-menu ul li a {
+  grid-template-columns: 4rem 0fr;
+  width: 4rem;
+  overflow: hidden;
+}
+
+.sidebar-mini .sidebar-menu ul li a label {
+  opacity: 0;
+  width: 0;
+  overflow: hidden;
+}
+
+.sidebar-mini .sidebar-menu ul li:hover {
+  width: 12rem;
+  overflow: visible;
+  box-shadow: 0 0.5rem 0.5rem #24242436;
+  position: absolute;
+  z-index: 10;
+  background-color: var(--sidebar-accent);
+}
+
+.sidebar-mini .sidebar-menu ul li:hover a {
+  grid-template-columns: 4rem 1fr;
+  width: 12rem;
+}
+
+.sidebar-mini .sidebar-menu ul li:hover a label {
+  opacity: 1;
+  width: auto;
+  overflow: visible;
+}
+    /* Main Content Styles */
+    .main-content {
+      margin-left: 16rem;
+      width: calc(100% - 16rem);
+      transition: margin-left 0.25s linear;
+    }
+
+    .sidebar-mini + .main-content {
+      margin-left: 4rem;
+      width: calc(100% - 4rem);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-icon {
+      width: 32px;
+      height: 32px;
+    }
+
+    .progress-container {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .progress-steps {
+      display: flex;
+      gap: 15px;
+    }
+
+    .progress-step {
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 14px;
+      background-color: #e2e8f0;
+      color: #64748b;
+    }
+
+    .progress-step.active {
+      background-color: var(--primary);
+      color: white;
+    }
+
+    /* Dashboard Styles */
+    .dashboard-content {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      padding: 30px;
+    }
+
+    /* Waste Type Cards */
+    .waste-type-card {
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .waste-type-card:hover, .waste-type-card.selected {
+      border-color: var(--primary);
+      background-color: rgba(13, 148, 136, 0.05);
+    }
+
+    .waste-type-card.selected {
+    border: 2px solid #4CAF50; /* Green border for selected */
+    background-color: #e8f5e9; /* Light green background */
+}
+
+
+    .waste-icon {
+      width: 50px;
+      height: 50px;
+      background-color: var(--light);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 15px;
+    }
+
+    .waste-info {
+      flex: 1;
+    }
+
+    .waste-type-title {
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .waste-price {
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    /* Form Styles */
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    /* Button Styles */
+    .btn {
+      padding: 12px 20px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-dark);
+    }
+
+    .btn-secondary {
+      background-color: var(--light);
+      color: var(--primary);
+      border: 1px solid var(--primary);
+    }
+
+    .btn-secondary:hover {
+      background-color: #e6e6e6;
+    }
+
+    /* Payment Page Styles */
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 15px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .summary-row:last-child {
+      border-bottom: none;
+    }
+
+    .summary-label {
+      font-weight: 600;
+    }
+
+    .summary-total {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .payment-options {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .payment-option {
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 15px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .payment-option:hover, .payment-option.selected {
+      border-color: var(--primary);
+      background-color: rgba(13, 148, 136, 0.05);
+    }
+
+    .payment-option.selected {
+      border-width: 2px;
+    }
+
+    .payment-icon {
+      width: 50px;
+      height: 50px;
+      margin: 0 auto 10px;
+    }
+
+    .payment-title {
+      font-weight: 600;
+    }
+    /* Add to your existing CSS */
+.login-status-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  background-color: var(--primary);
+  color: white;
+  padding: 8px 0;
+  font-size: 14px;
+  z-index: 1000; /* Ensure it stays above other elements */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Adjust the sidebar and main content to account for the status bar */
+body {
+  padding-top: 40px; /* Space for the status bar */
+}
+
+aside {
+  top: 40px; /* Push sidebar down below status bar */
+  height: calc(100vh - 40px);
+}
+
+/* For mobile view */
+@media (max-width: 768px) {
+  .login-status-bar {
+    font-size: 12px;
+    padding: 6px 0;
+  }
+  
+  body {
+    padding-top: 36px;
+  }
+  
+  aside {
+    top: 36px;
+    height: calc(100vh - 36px);
+  }
+}
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+      aside {
+        width: 4rem;
+      }
+      
+      .main-content {
+        margin-left: 4rem;
+        width: calc(100% - 4rem);
+      }
+      
+      .progress-steps {
+        flex-direction: column;
+        gap: 10px;
+      }
+      
+      .waste-type-card {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .waste-icon {
+        margin: 0 auto 15px;
+      }
+      
+      .payment-options {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 10px;
+      }
+      
+      .header {
+        padding: 10px 0;
+        flex-direction: column;
+        gap: 15px;
+      }
+      
+      .logo {
+        font-size: 20px;
+      }
+      
+      .btn {
+        padding: 10px 15px;
+        font-size: 14px;
+      }
+      
+      .dashboard-content {
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Add this right after the <body> tag, before the sidebar -->
+<div class="login-status-bar">
+  <p id="loggedInUser">Logged in as </p>
+
+</div>
+  <!-- Sidebar -->
+ <!-- Sidebar -->
+<aside id="sidebar">
+  <button id="toggle" class="sidebar-toggle">
+    <i class="fi-rr-menu-burger"></i>
+  </button>
+  <div class="sidebar-menu link">
+    <ul>
+     
+      <li>
+        <a href="subsidy.html">
+          <i class="fas fa-rupee-sign"></i> <!-- Font Awesome rupee icon -->
+          <label>Subsidy</label>
+        </a>
+      </li>
+      <li>
+        <a href="client-dash.html">
+          <i class="fi-rr-user"></i>
+          <label>Request</label>
+        </a>
+      </li>
+      <li>
+        <a href="settings.html">
+          <i class="fi-rr-settings"></i>
+          <label>Settings</label>
+        </a>
+      </li>
+    
+    </ul>
+  </div>
+</aside>
+
+  <!-- Main Content -->
+  <div class="main-content" id="main-content">
+    <!-- Request Pickup Interface -->
+    <div id="request-pickup" style="display: block;">
+      <header class="header container">
+        <div class="logo">
+          <svg class="logo-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 6h18"></path>
+            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+          </svg>
+          Kerala Waste Collection
+        </div>
+        <div class="progress-container">
+          <div class="progress-steps">
+            <div class="progress-step active">Select Waste Type</div>
+            <div class="progress-step">Payment</div>
+          </div>
+        </div>
+      </header>
+      
+      <div class="container">
+        <div class="dashboard-content">
+          <h2 style="margin-bottom: 30px;">Request Waste Pickup</h2>
+          
+          <h3 style="margin-bottom: 20px;">Select Waste Type</h3>
+          
+          <div class="waste-type-card" onclick="selectWasteType(this)">
+            <div class="waste-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 6h18"></path>
+                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+              </svg>
+            </div>
+            <div class="waste-info">
+              <div class="waste-type-title">General Household Waste</div>
+            </div>
+            <div class="waste-price">₹75/pickup</div>
+          </div>
+          
+          <div class="waste-type-card" onclick="selectWasteType(this)">
+            <div class="waste-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 21h10"></path>
+                <path d="M12 21v-6"></path>
+                <path d="M3.58 5.41h16.84"></path>
+                <path d="M5.25 3.5h13.5"></path>
+                <path d="M4.5 7.5v6.83"></path>
+                <path d="M19.5 7.5v6.83"></path>
+                <path d="M4.89 15h14.22"></path>
+                <path d="M4.89 15l-1.05 4.5"></path>
+                <path d="M19.11 15l1.05 4.5"></path>
+              </svg>
+            </div>
+            <div class="waste-info">
+              <div class="waste-type-title">Recyclable Waste</div>
+            </div>
+            <div class="waste-price">₹50/pickup</div>
+          </div>
+          
+          <div class="waste-type-card" onclick="selectWasteType(this)">
+            <div class="waste-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 2v2"></path>
+                <path d="M18 2v2"></path>
+                <rect x="2" y="5" width="20" height="17" rx="2"></rect>
+              </svg>
+            </div>
+            <div class="waste-info">
+              <div class="waste-type-title">Organic Waste</div>
+            </div>
+            <div class="waste-price">₹60/pickup</div>
+          </div>
+          
+          <div class="waste-type-card" onclick="selectWasteType(this)">
+            <div class="waste-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M10 2v4"></path>
+                <path d="M14 2v4"></path>
+                <path d="M2 14h8"></path>
+                <path d="M14 14h8"></path>
+                <path d="M10 18v4"></path>
+                <path d="M14 18v4"></path>
+                <path d="M6 6h12a4 4 0 0 1 4 4v4a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4v-4a4 4 0 0 1 4-4z"></path>
+              </svg>
+            </div>
+            <div class="waste-info">
+              <div class="waste-type-title">E-Waste</div>
+            </div>
+            <div class="waste-price">₹120/pickup</div>
+          </div>
+          
+          <div class="waste-type-card" onclick="selectWasteType(this)">
+            <div class="waste-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22v-5"></path>
+                <path d="M9 7V2"></path>
+                <path d="M15 7V2"></path>
+                <path d="M5 10V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2z"></path>
+                <path d="M8 22V7m0 0l-3 1.5C4 10 3 11 3 13s2 3 3 3c3.5 0 4-3 4-4.5"></path>
+                <path d="M16 22V14m0 0l3-1.5c1-.5 2-1.5 2-3.5s-2-3-3-3c-3.5 0-4 3-4 4.5"></path>
+              </svg>
+            </div>
+            <div class="waste-info">
+              <div class="waste-type-title">Hazardous Waste</div>
+            </div>
+            <div class="waste-price">₹150/pickup</div>
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label">Estimated Weight (kg)</label>
+            <input type="number" class="form-input" placeholder="Enter estimated weight" value="15" id="waste-weight">
+          </div>
+          
+          <div style="display: flex; justify-content: flex-end; margin-top: 30px;">
+            <button class="btn btn-primary" onclick="showPayment()">Continue to Payment</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Payment Interface -->
+    <div id="payment" style="display: none;">
+      <header class="header container">
+        <div class="logo">
+          <svg class="logo-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 6h18"></path>
+            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+          </svg>
+          Kerala Waste Collection
+        </div>
+        <div class="progress-container">
+          <div class="progress-steps">
+            <div class="progress-step">Select Waste Type</div>
+            <div class="progress-step active">Payment</div>
+          </div>
+        </div>
+      </header>
+      
+      <div class="container">
+        <div class="dashboard-content">
+          <h2 style="margin-bottom: 30px;">Payment</h2>
+          
+          <div class="card" style="margin-bottom: 30px;">
+            <h3 style="margin-bottom: 20px;">Order Summary</h3>
+            
+            <div class="summary-row">
+              <div class="summary-label">Waste Type:</div>
+              <div id="summary-waste-type" class="summary-value">General Household Waste</div>
+            </div>
+            <div class="summary-row">
+              <div class="summary-label">Estimated Weight:</div>
+              <div id="summary-weight" class="summary-value">15 kg</div>
+            </div>
+            <div class="summary-row">
+              <div class="summary-label">Base Price:</div>
+              <div id="summary-price" class="summary-value">₹75</div>
+            </div>
+            <div class="summary-row">
+              <div class="summary-label">Tax (18%):</div>
+              <div id="summary-tax" class="summary-value">₹13.50</div>
+            </div>
+            <div class="summary-row">
+              <div class="summary-label">Total Amount:</div>
+              <div id="summary-total" class="summary-total">₹88.50</div>
+            </div>
+          </div>
+          <h3 style="margin-bottom: 20px;">Select Payment Method</h3>
+
+<div class="payment-options">
+  <div class="payment-option" data-value="postpaid" onclick="selectPaymentOption(this)">
+    <div class="payment-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+        <line x1="1" y1="10" x2="23" y2="10"></line>
+        <path d="M5 14h.01"></path>
+        <path d="M9 14h.01"></path>
+        <path d="M13 14h.01"></path>
+        <path d="M17 14h.01"></path>
+      </svg>
+    </div>
+    <div class="payment-title">Post Paid</div>
+    <div class="payment-description">Pay after collection</div>
+  </div>
+
+  <div class="payment-option" data-value="prepaid" onclick="selectPaymentOption(this)">
+    <div class="payment-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+        <line x1="1" y1="10" x2="23" y2="10"></line>
+        <path d="M6 15h.01"></path>
+        <path d="M12 15h.01"></path>
+        <path d="M18 15h.01"></path>
+      </svg>
+    </div>
+    <div class="payment-title">Pre Paid</div>
+    <div class="payment-description">Pay now</div>
+  </div>
+</div>
+          
+          <div style="display: flex; justify-content: space-between; margin-top: 30px;">
+            <button class="btn btn-secondary" onclick="backToWasteSelection()">Back</button>
+            <button class="btn btn-primary" id="submitRequest" onclick="">Confirm Payment</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+// Sidebar Toggle Functionality
+const sidebar = document.getElementById("sidebar");
+const toggle = document.getElementById("toggle");
+const mainContent = document.getElementById("main-content");
+
+toggle.addEventListener("click", function() {
+  if (sidebar.classList.contains("sidebar-mini")) {
+    sidebar.classList.remove("sidebar-mini");
+  } else {
+    sidebar.classList.add("sidebar-mini");
+  }
+});
+
+// Optional: Update active state on click
+document.querySelectorAll('.sidebar-menu ul li a').forEach(link => {
+  link.addEventListener('click', function() {
+    document.querySelectorAll('.sidebar-menu ul li a').forEach(item => {
+      item.classList.remove('active');
+    });
+    this.classList.add('active');
+  });
+});
+
+    // Waste Type Selection
+    function selectWasteType(card) {
+      document.querySelectorAll('.waste-type-card').forEach(c => {
+        c.classList.remove('selected');
+      });
+      card.classList.add('selected');
+    }
+
+    // Menu Item Selection
+    function selectMenuItem(menuItem) {
+      document.querySelectorAll('.sidebar-menu ul li').forEach(item => {
+        item.classList.remove('active');
+      });
+      menuItem.classList.add('active');
+    }
+
+    // Payment Option Selection
+    function selectPaymentOption(option) {
+      document.querySelectorAll('.payment-option').forEach(o => {
+        o.classList.remove('selected');
+      });
+      option.classList.add('selected');
+    }
+
+    // Show Payment Page
+    function showPayment() {
+      document.getElementById('request-pickup').style.display = 'none';
+      document.getElementById('payment').style.display = 'block';
+      
+      // Update summary information
+      const selectedWaste = document.querySelector('.waste-type-card.selected .waste-type-title').textContent;
+      const wastePrice = document.querySelector('.waste-type-card.selected .waste-price').textContent;
+      const weight = document.querySelector('.form-input[type="number"]').value || '15';
+      
+      document.getElementById('summary-waste-type').textContent = selectedWaste;
+      document.getElementById('summary-weight').textContent = weight + ' kg';
+      document.getElementById('summary-price').textContent = wastePrice;
+      
+      // Calculate tax and total
+      const price = parseFloat(wastePrice.replace(/[^0-9.]/g, ''));
+      const tax = price * 0.18;
+      const total = price + tax;
+      
+      document.getElementById('summary-tax').textContent = '₹' + tax.toFixed(2);
+      document.getElementById('summary-total').textContent = '₹' + total.toFixed(2);
+    }
+
+    // Back to Waste Selection
+    function backToWasteSelection() {
+      document.getElementById('payment').style.display = 'none';
+      document.getElementById('request-pickup').style.display = 'block';
+    }
+
+    // Confirm Payment
+    function confirmPayment() {
+      const selectedOption = document.querySelector('.payment-option.selected .payment-title').textContent;
+      alert(`Payment confirmed as ${selectedOption}! Your waste pickup has been scheduled.`);
+    }
+  </script>
+<!-- Load Firebase Config First -->
+<script type="module" src="firebase-config.js"></script>
+<!-- Load Client-side Logic -->
+<script type="module" src="client-side.js"></script>
+
+</body>
+</html>

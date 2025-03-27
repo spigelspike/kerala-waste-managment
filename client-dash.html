@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Requests | Kerala Waste Collection</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    :root {
+      --primary: #0d9488;
+      --primary-dark: #0f766e;
+      --light: #f8fafc;
+      --dark: #1e293b;
+      --gray: #64748b;
+    }
+    
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f0f9ff;
+      color: var(--dark);
+      margin: 0;
+      padding: 20px;
+    }
+    
+    h3 {
+      color: var(--primary-dark);
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--primary);
+    }
+    
+    #requestsList {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .request-card {
+      background-color: white;
+      padding: 20px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .request-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .request-id {
+      font-weight: bold;
+      color: var(--primary);
+    }
+    
+    .request-status {
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 0.8rem;
+      font-weight: bold;
+    }
+    
+    .request-status.pending {
+      background-color: #fff3cd;
+      color: #856404;
+    }
+    
+    .request-status.completed {
+      background-color: #d4edda;
+      color: #155724;
+    }
+    
+    .payment-status {
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 0.8rem;
+      font-weight: bold;
+    }
+    
+    .payment-status.prepaid {
+      background-color: #e6f3f1;
+      color: var(--primary);
+    }
+    
+    .payment-status.postpaid {
+      background-color: #f3e6e6;
+      color: #d9534f;
+    }
+    
+    .request-details p {
+      margin: 5px 0;
+    }
+    
+    .no-requests {
+      text-align: center;
+      color: var(--gray);
+      padding: 40px 0;
+    }
+    
+    .login-status-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      text-align: center;
+      background-color: var(--primary);
+      color: white;
+      padding: 8px 0;
+      font-size: 14px;
+      z-index: 1000;
+    }
+    
+    body {
+      padding-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-status-bar">
+    <p id="loggedInUser">Logged in as </p>
+  </div>
+  
+  <h3>Your Waste Collection Requests</h3>
+  <div id="requestsList">
+    <!-- Requests will be loaded here -->
+  </div>
+
+
+</body>
+</html>

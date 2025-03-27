@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Green Kerala - Collector Profile</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    :root {
+      --primary: #0d9488;
+      --light: #f0f9ff;
+      --gray: #6b7280;
+      --success: #22c55e;
+      --accent: #f59e0b;
+      --background: #f4f4f4;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: var(--background);
+      line-height: 1.6;
+    }
+
+    .main-content {
+      padding: 20px;
+      background-color: var(--background);
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .profile-container {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 20px;
+    }
+
+    .profile-sidebar {
+      background-color: white;
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .profile-image {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 15px;
+    }
+
+    .profile-details {
+      background-color: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .detail-item {
+      background-color: var(--light);
+      padding: 15px;
+      border-radius: 5px;
+    }
+
+    .detail-label {
+      color: var(--gray);
+      font-size: 0.9rem;
+      margin-bottom: 5px;
+    }
+
+    .detail-value {
+      font-weight: bold;
+      color: var(--primary);
+    }
+
+    .action-btn {
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      width: 100%;
+      margin-top: 15px;
+    }
+
+    .action-btn:hover {
+      background-color: #0f766e;
+    }
+  </style>
+</head>
+<body>
+  <div class="main-content">
+    <div class="header">
+      <h1>Collector Profile</h1>
+      <button class="action-btn">
+        <i class="fas fa-edit"></i> Edit Profile
+      </button>
+    </div>
+
+    <div class="profile-container">
+      <div class="profile-sidebar">
+        <img src="media\shamil.jpeg" alt="Profile" class="profile-image">
+        <h2>Mohammed Shamil</h2>
+        <p>Waste Collection Specialist</p>
+      </div>
+
+      <div class="profile-details">
+        <h2>Personal Information</h2>
+        <div class="detail-grid">
+          <div class="detail-item">
+            <div class="detail-label">Email</div>
+            <div class="detail-value">Shamil.mhd@greenkerala.org</div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-label">Phone</div>
+            <div class="detail-value">+91 9876 5432 10</div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-label">City</div>
+            <div class="detail-value">puzhakatri</div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-label">District</div>
+            <div class="detail-value">Malappuram</div>
+          </div>
+        </div>
+
+        <h2 style="margin-top: 20px;">Professional Details</h2>
+        <div class="detail-grid">
+          <div class="detail-item">
+            <div class="detail-label">Employee ID</div>
+            <div class="detail-value">GK-COL-059</div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-label">Joined Date</div>
+            <div class="detail-value">01 Jan 2023</div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-label">Total Pickups</div>
+            <div class="detail-value">142</div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-label">Total Collection</div>
+            <div class="detail-value">2,560 kg</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

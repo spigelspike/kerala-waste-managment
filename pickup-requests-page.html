@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Green Kerala - Pickup Requests</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* Reusing the styles from the collector-dash.html */
+    :root {
+      --primary: #0d9488;
+      --light: #f0f9ff;
+      --gray: #6b7280;
+      --success: #22c55e;
+      --accent: #f59e0b;
+      --background: #f4f4f4;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: var(--background);
+      line-height: 1.6;
+    }
+
+    .main-content {
+      padding: 20px;
+      background-color: var(--background);
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .table {
+      width: 100%;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+
+    .table-container {
+      padding: 20px;
+    }
+
+    .table-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .table th, 
+    .table td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #f1f1f1;
+    }
+
+    .status-badge {
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+    }
+
+    .status-new {
+      background-color: rgba(59, 130, 246, 0.1);
+      color: #3b82f6;
+    }
+
+    .status-assigned {
+      background-color: rgba(245, 158, 11, 0.1);
+      color: var(--accent);
+    }
+
+    .status-completed {
+      background-color: rgba(34, 197, 94, 0.1);
+      color: var(--success);
+    }
+
+    .action-btn {
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .action-btn:hover {
+      background-color: #0f766e;
+    }
+  </style>
+</head>
+<body>
+  <div class="main-content">
+    <div class="header">
+      <h1>Pickup Requests</h1>
+      <button class="action-btn">
+        <i class="fas fa-plus"></i> New Request
+      </button>
+    </div>
+
+    <div class="table-container">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Request ID</th>
+            <th>Customer Name</th>
+            <th>Address</th>
+            <th>Waste Type</th>
+            <th>Estimated Weight</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>#REQ-059</td>
+            <td>Anita George</td>
+            <td>Kakkanad, Kochi</td>
+            <td>Recyclable</td>
+            <td>20 kg</td>
+            <td><span class="status-badge status-new">New</span></td>
+            <td>
+              <button class="action-btn">View</button>
+            </td>
+          </tr>
+          <tr>
+            <td>#REQ-060</td>
+            <td>Mohanan Pillai</td>
+            <td>Thrissur</td>
+            <td>E-Waste</td>
+            <td>15 kg</td>
+            <td><span class="status-badge status-assigned">Assigned</span></td>
+            <td>
+              <button class="action-btn">View</button>
+            </td>
+          </tr>
+          <tr>
+            <td>#REQ-061</td>
+            <td>Lakshmi Menon</td>
+            <td>Trivandrum</td>
+            <td>General Waste</td>
+            <td>10 kg</td>
+            <td><span class="status-badge status-completed">Completed</span></td>
+            <td>
+              <button class="action-btn">View</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>

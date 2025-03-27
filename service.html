@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Services - Green Kerala Waste Collection</title>
+  <style>
+    :root {
+      --primary: #0d9488;
+      --primary-dark: #0f766e;
+      --light: #ffffff;
+      --dark: #1e293b;
+      --gray: #64748b;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      background-color: #f0f9ff;
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+    
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+    
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 10px;
+    }
+    
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 0;
+      flex-wrap: wrap;
+    }
+    
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: var(--primary);
+      padding: 5px 0;
+    }
+    
+    .logo img {
+      height: 40px;
+      width: auto;
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 10px;
+    }
+    
+    .nav {
+      display: flex;
+      gap: 15px;
+    }
+    
+    .nav-link {
+      text-decoration: none;
+      color: var(--dark);
+      padding: 10px;
+      border-radius: 4px;
+      transition: background-color 0.3s;
+      font-weight: 500;
+    }
+    
+    .nav-link:hover {
+      background-color: var(--primary);
+      color: white;
+    }
+    
+    .mobile-menu-btn {
+      display: none;
+      background: transparent;
+      border: none;
+      font-size: 24px;
+      color: var(--primary);
+      cursor: pointer;
+    }
+    
+    .services-content {
+      margin: 30px 0;
+    }
+    
+    .services-title {
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+      color: var(--primary-dark);
+      text-align: center;
+    }
+    
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    
+    .service-card {
+      background-color: var(--light);
+      border-radius: 10px;
+      padding: 25px;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+    
+    .service-card:hover {
+      transform: translateY(-10px);
+    }
+    
+    .service-icon {
+      font-size: 48px;
+      color: var(--primary);
+      margin-bottom: 15px;
+    }
+    
+    .service-title {
+      font-size: 1.2rem;
+      color: var(--primary-dark);
+      margin-bottom: 10px;
+    }
+    
+    .service-description {
+      font-size: 0.9rem;
+      color: var(--gray);
+    }
+    
+    /* Responsive styles */
+    @media (max-width: 768px) {
+      .container {
+        width: 95%;
+        padding: 10px;
+      }
+      
+      .services-title {
+        font-size: 2rem;
+      }
+      
+      .nav {
+        display: none;
+      }
+      
+      .mobile-menu-btn {
+        display: block;
+      }
+      
+      .nav.active {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin-top: 15px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .services-title {
+        font-size: 1.8rem;
+      }
+      
+      .logo {
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <div class="logo">
+        <img src="media/icons8-recycle-bin-50.png" alt="Green Kerala Logo"> Green Kerala
+      </div>
+      <button class="mobile-menu-btn">☰</button>
+      <nav class="nav">
+        <a href="main-page.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="services.html" class="nav-link">Services</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+    </header>
+
+    <!-- Services Section -->
+    <div class="services-content">
+      <h1 class="services-title">Our Comprehensive Waste Management Services</h1>
+      
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">🏠</div>
+          <h2 class="service-title">Door-to-Door Collection</h2>
+          <p class="service-description">
+            Convenient and reliable waste pickup directly from your doorstep, ensuring hassle-free disposal for residential areas.
+          </p>
+        </div>
+        
+        <div class="service-card">
+          <div class="service-icon">♻️</div>
+          <h2 class="service-title">Waste Segregation</h2>
+          <p class="service-description">
+            Professional sorting of waste into recyclables, organic waste, and non-recyclable materials to maximize recycling potential.
+          </p>
+        </div>
+        
+        <div class="service-card">
+          <div class="service-icon">🌱</div>
+          <h2 class="service-title">Composting Solutions</h2>
+          <p class="service-description">
+            Transform organic waste into nutrient-rich compost, supporting local agriculture and reducing landfill waste.
+          </p>
+        </div>
+        
+        <div class="service-card">
+          <div class="service-icon">📱</div>
+          <h2 class="service-title">Digital Tracking</h2>
+          <p class="service-description">
+            User-friendly mobile app and online platform to schedule pickups, track waste collection, and earn eco-points.
+          </p>
+        </div>
+        
+        <div class="service-card">
+          <div class="service-icon">🏢</div>
+          <h2 class="service-title">Commercial Waste Management</h2>
+          <p class="service-description">
+            Specialized waste collection and management services for businesses, offices, and commercial establishments.
+          </p>
+        </div>
+        
+        <div class="service-card">
+          <div class="service-icon">📚</div>
+          <h2 class="service-title">Community Education</h2>
+          <p class="service-description">
+            Workshops and awareness programs to promote sustainable waste management practices across Kerala.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Mobile menu toggle
+    document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+      document.querySelector('.nav').classList.toggle('active');
+    });
+  </script>
+</body>
+</html>

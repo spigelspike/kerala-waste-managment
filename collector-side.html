@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Green Kerala - Collector Dashboard</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/swiper/10.3.1/swiper-bundle.min.css">
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <style>
+      :root {
+      --primary: #0d9488;
+      --primary-dark: #0f766e;
+      --light: #ffffff;
+      --dark: #1e293b;
+      --gray: #64748b;
+      --bg-light: #f4f4f4;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-light);
+      color: var(--dark);
+      line-height: 1.6;
+      padding-left: 260px; /* Accommodate sidebar width */
+      transition: padding-left 0.5s ease;
+    }
+    body.sidebar-closed {
+      padding-left: 80px;
+    }
+
+    /* Sidebar Styles */
+    .sidebar {
+      background-color: var(--light);
+      width: 260px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      padding: 80px 20px;
+      z-index: 100;
+      overflow-y: scroll;
+      box-shadow: 0 0 1px rgba(0,0,0,0.1);
+      transition: all 0.5s ease;
+    }
+    .sidebar.close {
+      padding: 60px 0;
+      width: 80px;
+    }
+    .sidebar::-webkit-scrollbar {
+      display: none;
+    }
+    .menu_content {
+      position: relative;
+    }
+    .menu_title {
+      margin: 15px 0;
+      padding: 0 20px;
+      font-size: 18px;
+      color: var(--gray);
+    }
+    .sidebar.close .menu_title {
+      padding: 6px 30px;
+    }
+    .menu_items {
+      padding: 0;
+      list-style: none;
+    }
+    .navlink_icon {
+      position: relative;
+      font-size: 22px;
+      min-width: 50px;
+      line-height: 40px;
+      display: inline-block;
+      text-align: center;
+      border-radius: 6px;
+      color: var(--gray);
+    }
+    .sidebar .nav_link {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      padding: 4px 15px;
+      border-radius: 8px;
+      text-decoration: none;
+      color: var(--dark);
+      white-space: nowrap;
+      transition: all 0.3s ease;
+    }
+    .sidebar.close .navlink {
+      display: none;
+    }
+    .nav_link:hover {
+      color: var(--light);
+      background: var(--primary);
+    }
+    .nav_link:hover .navlink_icon {
+      color: var(--light);
+    }
+    .sidebar.close .nav_link:hover {
+      background: var(--light);
+    }
+    .submenu_item {
+      cursor: pointer;
+    }
+    .submenu {
+      display: none;
+    }
+    .submenu_item .arrow-left {
+      position: absolute;
+      right: 10px;
+      display: inline-block;
+      margin-right: auto;
+      transition: transform 0.3s ease;
+    }
+    .sidebar.close .submenu {
+      display: none;
+    }
+    .show_submenu ~ .submenu {
+      display: block;
+    }
+    .show_submenu .arrow-left {
+      transform: rotate(90deg);
+    }
+    .submenu .sublink {
+      padding: 15px 15px 15px 52px;
+      color: var(--dark);
+      text-decoration: none;
+      display: block;
+      transition: all 0.3s ease;
+    }
+    .submenu .sublink:hover {
+      color: var(--primary);
+    }
+    .bottom_content {
+      position: fixed;
+      bottom: 60px;
+      left: 0;
+      width: 260px;
+      cursor: pointer;
+      transition: all 0.5s ease;
+    }
+    .bottom {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      left: 0;
+      justify-content: space-around;
+      padding: 18px 0;
+      text-align: center;
+      width: 100%;
+      color: var(--gray);
+      border-top: 1px solid rgba(0,0,0,0.1);
+      background-color: var(--light);
+    }
+    .bottom i {
+      font-size: 20px;
+    }
+    .bottom span {
+      font-size: 18px;
+    }
+    .sidebar.close .bottom_content {
+      width: 50px;
+      left: 15px;
+    }
+    .sidebar.close .bottom span {
+      display: none;
+    }
+    .sidebar.hoverable .collapse_sidebar {
+      display: none;
+    }
+    .container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 90px 20px 20px; /* Added top padding for header */
+}
+    .header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 260px; /* Match initial sidebar width */
+  z-index: 999; /* Ensure it stays above content */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 30px;
+  border-top: 4px solid var(--primary);
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  background-color: var(--light);
+  transition: left 0.5s ease; /* Smooth transition with sidebar */
+}
+
+body.sidebar-closed .header {
+  left: 80px; /* Match collapsed sidebar width */
+}
+    .logo {
+      display: flex;
+      align-items: center;
+      font-size: 1.5rem;
+      color: var(--primary);
+      font-weight: bold;
+    }
+
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      margin-right: 15px;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .btn {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-secondary {
+      background-color: var(--gray);
+      color: var(--light);
+    }
+
+    .dashboard {
+      display: flex;
+      margin-top: 30px;
+    }
+
+    .dashboard-content {
+      flex-grow: 1;
+    }
+
+    .dashboard-content h2 {
+      margin-bottom: 20px;
+      color: var(--primary);
+    }
+
+    .request-filters {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .btn-filter {
+      background-color: transparent;
+      border: 1px solid var(--primary);
+      color: var(--primary);
+    }
+
+    .btn-filter.active {
+      background-color: var(--primary);
+      color: var(--light);
+    }
+
+    .request-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .request-card {
+      background-color: var(--light);
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .request-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    }
+
+    .request-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 15px;
+    }
+
+    .request-id {
+      font-weight: bold;
+      color: var(--primary);
+    }
+
+    .request-status {
+      padding: 5px 10px;
+      border-radius: 15px;
+      font-size: 0.8rem;
+    }
+
+    .request-status.prepaid {
+      background-color: #e6f3f1;
+      color: var(--primary);
+    }
+
+    .request-status.postpaid {
+      background-color: #f3e6e6;
+      color: #d9534f;
+    }
+
+    .request-details {
+      margin-bottom: 15px;
+    }
+
+    .request-customer h3 {
+      margin-bottom: 5px;
+    }
+
+    .request-waste-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    .waste-type {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .request-actions {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: var(--light);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-dark);
+    }
+
+    /* Add to your existing CSS */
+.request-status {
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.request-status.pending {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.request-status.scheduled {
+    background-color: #cce5ff;
+    color: #004085;
+}
+
+.request-status.completed {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.request-status.prepaid {
+    background-color: #e6f3f1;
+    color: var(--primary);
+}
+
+.request-status.postpaid {
+    background-color: #f3e6e6;
+    color: #d9534f;
+}
+
+.waste-icon {
+    font-size: 1.2em;
+}
+
+    /* Responsive Adjustments */
+    @media screen and (max-width: 1024px) {
+      @media screen and (max-width: 1024px) {
+  .header {
+    left: 0 !important; /* Full width on smaller screens */
+  }
+  
+  body, body.sidebar-closed {
+    padding-left: 0;
+    padding-top: 80px; /* Make space for header */
+  }
+}
+      .dashboard {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        position: relative;
+        height: auto;
+        padding: 20px;
+        margin-bottom: 20px;
+      }
+
+      body, body.sidebar-closed {
+        padding-left: 0;
+      }
+
+      .sidebar.close {
+        width: 100%;
+        padding: 20px;
+      }
+
+      .menu_items {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .menu_title {
+        display: none;
+      }
+
+      .request-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      }
+
+      .bottom_content {
+        position: relative;
+        bottom: auto;
+        width: 100%;
+        margin-top: 20px;
+      }
+    }
+    .requests-container {
+  position: relative;
+}
+
+.request-grid,
+.pending-grid,
+.completed-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  transition: all 0.3s ease;
+}
+
+.grid-active {
+  display: grid !important;
+}
+
+    @media screen and (max-width: 768px) {
+      .header {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .header-right {
+        margin-top: 15px;
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .request-actions {
+        flex-direction: column;
+      }
+
+      .request-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    /* Add to your existing CSS */
+.request-grid,
+.scheduled-grid,
+.completed-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.grid-active {
+  display: grid !important;
+}
+  </style>
+</head>
+<body>
+  <nav class="sidebar">
+    <div class="menu_content">
+      <ul class="menu_items">
+        <div class="menu_title menu_dahsboard"></div>
+        <li class="item">
+          <a href="pickup-requests-page.html" class="nav_link">
+            <span class="navlink_icon">
+              <i class="bx bx-package"></i>
+            </span>
+            <span class="navlink">Pickup Requests</span>
+          </a>
+        </li>
+        <li class="item">
+          <a href="scheduled-pickups-page.html" class="nav_link">
+            <span class="navlink_icon">
+              <i class="bx bx-calendar"></i>
+            </span>
+            <span class="navlink">Scheduled Pickups</span>
+          </a>
+        </li>
+        <li class="item">
+          <a href="analytics-page.html" class="nav_link">
+            <span class="navlink_icon">
+              <i class="bx bx-chart"></i>
+            </span>
+            <span class="navlink">Analytics</span>
+          </a>
+        </li>
+        <li class="item">
+          <a href="profile-page.html" class="nav_link">
+            <span class="navlink_icon">
+              <i class="bx bx-user"></i>
+            </span>
+            <span class="navlink">Profile</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="bottom_content">
+        <div class="bottom expand_sidebar">
+          <span>Expand</span>
+          <i class='bx bx-log-in'></i>
+        </div>
+        <div class="bottom collapse_sidebar">
+          <span>Collapse</span>
+          <i class='bx bx-log-out'></i>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <header class="header" role="banner">
+      <div class="logo" aria-label="Green Kerala Logo">
+        <svg class="logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" stroke="#0d9488" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Green Kerala
+      </div>
+     <div class="header-right">
+  <span id="collector-greeting">Logged in as Collector</span>
+  <a href="collector-dash.html" aria-label="Go to Dashboard">
+    <button class="btn btn-secondary">Dashboard</button>
+  </a>
+</div>
+    </header>
+
+    <div class="dashboard">
+      <div class="dashboard-content">
+        <h2>Pickup Requests</h2>
+        <!-- Replace the request-filters and request-grid section with this: -->
+        <div class="request-filters">
+          <button class="btn btn-filter active" data-filter="pending">Pending</button>
+          <button class="btn btn-filter" data-filter="completed">Completed</button>
+        </div>
+      
+        <div class="requests-container">
+          <div class="pending-grid grid-active" id="pending-requests"></div>
+          <div class="completed-grid" id="completed-requests" style="display:none;"></div>
+        </div>
+
+        <div class="request-grid">
+       
+          </div>
+
+        
+           
+           
+          </div>
+
+        
+           
+            </div>
+            <div class="request-actions">
+            
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Sidebar toggle functionality
+    const sidebar = document.querySelector('.sidebar');
+    const body = document.body;
+    const expandSidebar = document.querySelector('.expand_sidebar');
+    const collapseSidebar = document.querySelector('.collapse_sidebar');
+
+    expandSidebar.addEventListener('click', () => {
+      sidebar.classList.remove('close');
+      body.classList.remove('sidebar-closed');
+    });
+
+    collapseSidebar.addEventListener('click', () => {
+      sidebar.classList.add('close');
+      body.classList.add('sidebar-closed');
+    });
+
+    // Initial sidebar state based on screen width
+    if (window.innerWidth < 768) {
+      sidebar.classList.add('close');
+      body.classList.add('sidebar-closed');
+    }
+
+    // Responsive sidebar handling
+    window.addEventListener('resize', () => {
+      if (window.innerWidth < 768) {
+        sidebar.classList.add('close');
+        body.classList.add('sidebar-closed');
+      } else {
+        sidebar.classList.remove('close');
+        body.classList.remove('sidebar-closed');
+      }
+    });
+
+    // Filter buttons functionality
+    const filterButtons = document.querySelectorAll('.btn-filter');
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+      });
+    });
+  </script>
+<!-- Load Firebase Config First -->
+<script type="module" src="firebase-config.js"></script>
+<!-- Load Collector Logic -->
+<script type="module" src="collector-side.js"></script>
+
+</body>
+</html>

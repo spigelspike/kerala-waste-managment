@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Subsidy | Kerala Waste Collection</title>
+  <style>
+    :root {
+      --primary: #0d9488;
+      --primary-dark: #0f766e;
+      --light: #f8fafc;
+      --dark: #1e293b;
+    }
+    
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f0f9ff;
+      color: var(--dark);
+      margin: 0;
+      padding: 20px;
+    }
+    
+    h3 {
+      color: var(--primary-dark);
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--primary);
+    }
+    
+    .subsidy-summary {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+    
+    .summary-card {
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    
+    .summary-card h4 {
+      color: var(--primary);
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
+    
+    .summary-card .amount {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: var(--primary-dark);
+    }
+    
+    .bank-form {
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+    
+    .form-group {
+      margin-bottom: 15px;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: var(--primary-dark);
+    }
+    
+    .form-group input, 
+    .form-group select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 1rem;
+    }
+    
+    .btn {
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+    
+    .btn:hover {
+      background-color: var(--primary-dark);
+    }
+    
+    .btn-redeem {
+      background-color: #0d9488;
+      margin-top: 20px;
+      width: 100%;
+    }
+    
+    .btn-redeem:hover {
+      background-color: #0a776e;
+    }
+    
+    @media (max-width: 768px) {
+      .subsidy-summary {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h3>Your Waste Collection Subsidy</h3>
+  
+  <div class="subsidy-summary">
+    <div class="summary-card">
+      <h4>Total Accumulated</h4>
+      <div class="amount">₹1,250</div>
+    </div>
+    
+    <div class="summary-card">
+      <h4>Redeemed</h4>
+      <div class="amount">₹500</div>
+    </div>
+    
+    <div class="summary-card">
+      <h4>Balance to Redeem</h4>
+      <div class="amount">₹750</div>
+    </div>
+  </div>
+  
+  <div class="bank-form">
+    <h4>Bank Details for Subsidy Transfer</h4>
+    
+    <div class="form-group">
+      <label for="accountName">Account Holder Name</label>
+      <input type="text" id="accountName" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="accountNumber">Account Number</label>
+      <input type="text" id="accountNumber" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="bankName">Bank Name</label>
+      <input type="text" id="bankName" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="ifscCode">IFSC Code</label>
+      <input type="text" id="ifscCode" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="accountType">Account Type</label>
+      <select id="accountType" required>
+        <option value="">Select Account Type</option>
+        <option value="savings">Savings Account</option>
+        <option value="current">Current Account</option>
+      </select>
+    </div>
+    
+    <button class="btn btn-redeem">Redeem Now</button>
+  </div>
+
+  <script>
+    document.querySelector('.btn-redeem').addEventListener('click', function() {
+      // Validate form
+      const accountName = document.getElementById('accountName').value;
+      const accountNumber = document.getElementById('accountNumber').value;
+      const bankName = document.getElementById('bankName').value;
+      const ifscCode = document.getElementById('ifscCode').value;
+      const accountType = document.getElementById('accountType').value;
+      
+      if (!accountName || !accountNumber || !bankName || !ifscCode || !accountType) {
+        alert('Please fill all bank details');
+        return;
+      }
+      
+      // Validate account number (Indian account numbers are typically 9-18 digits)
+      if (!/^\d{9,18}$/.test(accountNumber)) {
+        alert('Please enter a valid account number (9-18 digits)');
+        return;
+      }
+      
+      // Validate IFSC code (format: 4 letters followed by 7 digits)
+      if (!/^[A-Za-z]{4}0[A-Z0-9a-z]{6}$/.test(ifscCode)) {
+        alert('Please enter a valid IFSC code (e.g., SBIN0001234)');
+        return;
+      }
+      
+      // If validation passes
+      alert('Subsidy redemption request submitted successfully!');
+      // Here you would typically send the data to your backend
+    });
+  </script>
+</body>
+</html>
