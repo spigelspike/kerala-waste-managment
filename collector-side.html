@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/swiper/10.3.1/swiper-bundle.min.css">
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
   <style>
-      :root {
+    :root {
       --primary: #0d9488;
       --primary-dark: #0f766e;
       --light: #ffffff;
@@ -30,6 +30,7 @@
       padding-left: 260px; /* Accommodate sidebar width */
       transition: padding-left 0.5s ease;
     }
+    
     body.sidebar-closed {
       padding-left: 80px;
     }
@@ -41,36 +42,47 @@
       position: fixed;
       top: 0;
       left: 0;
-      height: 100%;
-      padding: 80px 20px;
+      height: 100vh;
+      padding: 80px 20px 20px;
       z-index: 100;
-      overflow-y: scroll;
+      overflow-y: auto;
       box-shadow: 0 0 1px rgba(0,0,0,0.1);
       transition: all 0.5s ease;
     }
+    
     .sidebar.close {
       padding: 60px 0;
       width: 80px;
     }
+    
     .sidebar::-webkit-scrollbar {
       display: none;
     }
+    
     .menu_content {
       position: relative;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
+    
     .menu_title {
       margin: 15px 0;
       padding: 0 20px;
       font-size: 18px;
       color: var(--gray);
     }
+    
     .sidebar.close .menu_title {
       padding: 6px 30px;
     }
+    
     .menu_items {
       padding: 0;
       list-style: none;
     }
+    
     .navlink_icon {
       position: relative;
       font-size: 22px;
@@ -81,6 +93,7 @@
       border-radius: 6px;
       color: var(--gray);
     }
+    
     .sidebar .nav_link {
       display: flex;
       align-items: center;
@@ -92,25 +105,32 @@
       white-space: nowrap;
       transition: all 0.3s ease;
     }
+    
     .sidebar.close .navlink {
       display: none;
     }
+    
     .nav_link:hover {
       color: var(--light);
       background: var(--primary);
     }
+    
     .nav_link:hover .navlink_icon {
       color: var(--light);
     }
+    
     .sidebar.close .nav_link:hover {
       background: var(--light);
     }
+    
     .submenu_item {
       cursor: pointer;
     }
+    
     .submenu {
       display: none;
     }
+    
     .submenu_item .arrow-left {
       position: absolute;
       right: 10px;
@@ -118,15 +138,19 @@
       margin-right: auto;
       transition: transform 0.3s ease;
     }
+    
     .sidebar.close .submenu {
       display: none;
     }
+    
     .show_submenu ~ .submenu {
       display: block;
     }
+    
     .show_submenu .arrow-left {
       transform: rotate(90deg);
     }
+    
     .submenu .sublink {
       padding: 15px 15px 15px 52px;
       color: var(--dark);
@@ -134,22 +158,21 @@
       display: block;
       transition: all 0.3s ease;
     }
+    
     .submenu .sublink:hover {
       color: var(--primary);
     }
+    
     .bottom_content {
-      position: fixed;
-      bottom: 60px;
-      left: 0;
-      width: 260px;
+      margin-top: auto;
+      width: 100%;
       cursor: pointer;
       transition: all 0.5s ease;
     }
+    
     .bottom {
-      position: absolute;
       display: flex;
       align-items: center;
-      left: 0;
       justify-content: space-around;
       padding: 18px 0;
       text-align: center;
@@ -158,47 +181,50 @@
       border-top: 1px solid rgba(0,0,0,0.1);
       background-color: var(--light);
     }
+    
     .bottom i {
       font-size: 20px;
     }
+    
     .bottom span {
       font-size: 18px;
     }
-    .sidebar.close .bottom_content {
-      width: 50px;
-      left: 15px;
-    }
+    
     .sidebar.close .bottom span {
       display: none;
     }
+    
     .sidebar.hoverable .collapse_sidebar {
       display: none;
     }
+    
     .container {
-  width: 100%;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 90px 20px 20px; /* Added top padding for header */
-}
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 90px 20px 20px; /* Added top padding for header */
+    }
+    
     .header {
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 260px; /* Match initial sidebar width */
-  z-index: 999; /* Ensure it stays above content */
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 30px;
-  border-top: 4px solid var(--primary);
-  border-bottom: 1px solid rgba(0,0,0,0.1);
-  background-color: var(--light);
-  transition: left 0.5s ease; /* Smooth transition with sidebar */
-}
+      position: fixed;
+      top: 0;
+      right: 0;
+      left: 260px; /* Match initial sidebar width */
+      z-index: 99; /* Ensure it stays above content */
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 30px;
+      border-top: 4px solid var(--primary);
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+      background-color: var(--light);
+      transition: left 0.5s ease; /* Smooth transition with sidebar */
+    }
 
-body.sidebar-closed .header {
-  left: 80px; /* Match collapsed sidebar width */
-}
+    body.sidebar-closed .header {
+      left: 80px; /* Match collapsed sidebar width */
+    }
+    
     .logo {
       display: flex;
       align-items: center;
@@ -239,6 +265,7 @@ body.sidebar-closed .header {
 
     .dashboard-content {
       flex-grow: 1;
+      width: 100%;
     }
 
     .dashboard-content h2 {
@@ -250,6 +277,7 @@ body.sidebar-closed .header {
       display: flex;
       gap: 10px;
       margin-bottom: 20px;
+      flex-wrap: wrap;
     }
 
     .btn-filter {
@@ -286,6 +314,8 @@ body.sidebar-closed .header {
       display: flex;
       justify-content: space-between;
       margin-bottom: 15px;
+      flex-wrap: wrap;
+      gap: 10px;
     }
 
     .request-id {
@@ -297,6 +327,22 @@ body.sidebar-closed .header {
       padding: 5px 10px;
       border-radius: 15px;
       font-size: 0.8rem;
+      font-weight: bold;
+    }
+
+    .request-status.pending {
+      background-color: #fff3cd;
+      color: #856404;
+    }
+
+    .request-status.scheduled {
+      background-color: #cce5ff;
+      color: #004085;
+    }
+
+    .request-status.completed {
+      background-color: #d4edda;
+      color: #155724;
     }
 
     .request-status.prepaid {
@@ -322,12 +368,18 @@ body.sidebar-closed .header {
       justify-content: space-between;
       align-items: center;
       margin-top: 10px;
+      flex-wrap: wrap;
+      gap: 10px;
     }
 
     .waste-type {
       display: flex;
       align-items: center;
       gap: 10px;
+    }
+
+    .waste-icon {
+      font-size: 1.2em;
     }
 
     .request-actions {
@@ -339,155 +391,154 @@ body.sidebar-closed .header {
     .btn-primary {
       background-color: var(--primary);
       color: var(--light);
+      flex: 1;
     }
 
     .btn-primary:hover {
       background-color: var(--primary-dark);
     }
 
-    /* Add to your existing CSS */
-.request-status {
-    padding: 5px 10px;
-    border-radius: 15px;
-    font-size: 0.8rem;
-    font-weight: bold;
-}
+    .requests-container {
+      position: relative;
+    }
 
-.request-status.pending {
-    background-color: #fff3cd;
-    color: #856404;
-}
+    .pending-grid,
+    .completed-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+      transition: all 0.3s ease;
+    }
 
-.request-status.scheduled {
-    background-color: #cce5ff;
-    color: #004085;
-}
-
-.request-status.completed {
-    background-color: #d4edda;
-    color: #155724;
-}
-
-.request-status.prepaid {
-    background-color: #e6f3f1;
-    color: var(--primary);
-}
-
-.request-status.postpaid {
-    background-color: #f3e6e6;
-    color: #d9534f;
-}
-
-.waste-icon {
-    font-size: 1.2em;
-}
+    .grid-active {
+      display: grid !important;
+    }
 
     /* Responsive Adjustments */
     @media screen and (max-width: 1024px) {
-      @media screen and (max-width: 1024px) {
-  .header {
-    left: 0 !important; /* Full width on smaller screens */
-  }
-  
-  body, body.sidebar-closed {
-    padding-left: 0;
-    padding-top: 80px; /* Make space for header */
-  }
-}
-      .dashboard {
-        flex-direction: column;
-      }
-
-      .sidebar {
+      .header {
+        left: 0;
         width: 100%;
-        position: relative;
-        height: auto;
-        padding: 20px;
-        margin-bottom: 20px;
       }
-
+      
       body, body.sidebar-closed {
         padding-left: 0;
+        padding-top: 80px;
       }
-
-      .sidebar.close {
-        width: 100%;
-        padding: 20px;
+      
+      .sidebar {
+        transform: translateX(-100%);
+        z-index: 1000;
       }
-
-      .menu_items {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
+      
+      .sidebar.active {
+        transform: translateX(0);
       }
-
-      .menu_title {
-        display: none;
-      }
-
-      .request-grid {
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      }
-
-      .bottom_content {
-        position: relative;
-        bottom: auto;
-        width: 100%;
-        margin-top: 20px;
+      
+      .menu-toggle {
+        display: block;
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        z-index: 1001;
+        font-size: 24px;
+        cursor: pointer;
       }
     }
-    .requests-container {
-  position: relative;
-}
-
-.request-grid,
-.pending-grid,
-.completed-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
-  transition: all 0.3s ease;
-}
-
-.grid-active {
-  display: grid !important;
-}
 
     @media screen and (max-width: 768px) {
       .header {
-        flex-direction: column;
-        text-align: center;
+        padding: 15px;
       }
-
+      
       .header-right {
-        margin-top: 15px;
-        flex-direction: column;
-        width: 100%;
+        gap: 10px;
       }
-
-      .request-actions {
-        flex-direction: column;
-      }
-
-      .request-grid {
+      
+      .pending-grid,
+      .completed-grid {
         grid-template-columns: 1fr;
       }
+      
+      .request-actions {
+        flex-direction: column;  
+      }
+      
+      .btn {
+        width: 100%;
+        text-align: center;
+      }
+      
+      .header {
+        flex-wrap: wrap;
+      }
+      
+      #collector-greeting {
+        width: 100%;
+        margin-bottom: 10px;
+        text-align: center;
+      }
     }
-    /* Add to your existing CSS */
-.request-grid,
-.scheduled-grid,
-.completed-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
-}
 
-.grid-active {
-  display: grid !important;
-}
+    @media screen and (max-width: 480px) {
+      .container {
+        padding: 80px 15px 15px;
+      }
+      
+      .request-card {
+        padding: 15px;
+      }
+      
+      .logo {
+        font-size: 1.2rem;
+      }
+      
+      .logo-icon {
+        width: 30px;
+        height: 30px;
+      }
+      
+      .btn {
+        padding: 8px 12px;
+        font-size: 14px;
+      }
+    }
+    
+    /* Mobile sidebar toggle */
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--primary);
+      font-size: 24px;
+      cursor: pointer;
+    }
+    
+    @media screen and (max-width: 1024px) {
+      .menu-toggle {
+        display: block;
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        z-index: 1001;
+      }
+      
+      .sidebar {
+        transform: translateX(-100%);
+      }
+      
+      .sidebar.active {
+        transform: translateX(0);
+      }
+    }
   </style>
 </head>
 <body>
+  <!-- Mobile menu toggle button -->
+  <button class="menu-toggle">
+    <i class='bx bx-menu'></i>
+  </button>
+
   <nav class="sidebar">
     <div class="menu_content">
       <ul class="menu_items">
@@ -547,54 +598,112 @@ body.sidebar-closed .header {
         </svg>
         Green Kerala
       </div>
-     <div class="header-right">
-  <span id="collector-greeting">Logged in as Collector</span>
-  <a href="collector-dash.html" aria-label="Go to Dashboard">
-    <button class="btn btn-secondary">Dashboard</button>
-  </a>
-</div>
+      <div class="header-right">
+        <span id="collector-greeting">Logged in as Collector</span>
+        <a href="collector-dash.html" aria-label="Go to Dashboard">
+          <button class="btn btn-secondary">Dashboard</button>
+        </a>
+      </div>
     </header>
 
     <div class="dashboard">
       <div class="dashboard-content">
         <h2>Pickup Requests</h2>
-        <!-- Replace the request-filters and request-grid section with this: -->
+        
         <div class="request-filters">
           <button class="btn btn-filter active" data-filter="pending">Pending</button>
           <button class="btn btn-filter" data-filter="completed">Completed</button>
         </div>
       
         <div class="requests-container">
-          <div class="pending-grid grid-active" id="pending-requests"></div>
-          <div class="completed-grid" id="completed-requests" style="display:none;"></div>
-        </div>
-
-        <div class="request-grid">
-       
-          </div>
-
-        
-           
-           
-          </div>
-
-        
-           
+          <div class="pending-grid grid-active" id="pending-requests">
+            <!-- Sample content for the pending grid -->
+            <div class="request-card">
+              <div class="request-header">
+                <span class="request-id">#REQ001</span>
+                <span class="request-status pending">Pending</span>
+              </div>
+              <div class="request-details">
+                <div class="request-customer">
+                  <h3>Rahul Sharma</h3>
+                  <p>123 Green Street, Kochi</p>
+                </div>
+                <div class="request-waste-info">
+                  <div class="waste-type">
+                    <i class="bx bx-recycle waste-icon"></i>
+                    <span>Plastic Waste</span>
+                  </div>
+                  <span>5 kg</span>
+                </div>
+              </div>
+              <div class="request-actions">
+                <button class="btn btn-primary">Schedule Pickup</button>
+                <button class="btn btn-primary">View Details</button>
+              </div>
             </div>
-            <div class="request-actions">
             
+            <div class="request-card">
+              <div class="request-header">
+                <span class="request-id">#REQ002</span>
+                <span class="request-status pending">Pending</span>
+              </div>
+              <div class="request-details">
+                <div class="request-customer">
+                  <h3>Priya Nair</h3>
+                  <p>456 Lake View, Trivandrum</p>
+                </div>
+                <div class="request-waste-info">
+                  <div class="waste-type">
+                    <i class="bx bx-trash waste-icon"></i>
+                    <span>E-Waste</span>
+                  </div>
+                  <span>3 kg</span>
+                </div>
+              </div>
+              <div class="request-actions">
+                <button class="btn btn-primary">Schedule Pickup</button>
+                <button class="btn btn-primary">View Details</button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="completed-grid" id="completed-requests" style="display:none;">
+            <!-- Sample content for the completed grid -->
+            <div class="request-card">
+              <div class="request-header">
+                <span class="request-id">#REQ003</span>
+                <span class="request-status completed">Completed</span>
+              </div>
+              <div class="request-details">
+                <div class="request-customer">
+                  <h3>Anoop Thomas</h3>
+                  <p>789 Palm Avenue, Kochi</p>
+                </div>
+                <div class="request-waste-info">
+                  <div class="waste-type">
+                    <i class="bx bx-paper waste-icon"></i>
+                    <span>Paper Waste</span>
+                  </div>
+                  <span>8 kg</span>
+                </div>
+              </div>
+              <div class="request-actions">
+                <button class="btn btn-primary">View Details</button>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+  
   <script>
     // Sidebar toggle functionality
     const sidebar = document.querySelector('.sidebar');
     const body = document.body;
     const expandSidebar = document.querySelector('.expand_sidebar');
     const collapseSidebar = document.querySelector('.collapse_sidebar');
+    const menuToggle = document.querySelector('.menu-toggle');
 
     expandSidebar.addEventListener('click', () => {
       sidebar.classList.remove('close');
@@ -605,18 +714,34 @@ body.sidebar-closed .header {
       sidebar.classList.add('close');
       body.classList.add('sidebar-closed');
     });
+    
+    // Mobile sidebar toggle
+    menuToggle.addEventListener('click', () => {
+      sidebar.classList.toggle('active');
+    });
+
+    // Detect clicks outside sidebar to close it on mobile
+    document.addEventListener('click', (e) => {
+      const isClickInsideSidebar = sidebar.contains(e.target);
+      const isClickOnToggle = menuToggle.contains(e.target);
+      
+      if (!isClickInsideSidebar && !isClickOnToggle && window.innerWidth <= 1024 && sidebar.classList.contains('active')) {
+        sidebar.classList.remove('active');
+      }
+    });
 
     // Initial sidebar state based on screen width
-    if (window.innerWidth < 768) {
+    if (window.innerWidth < 1024) {
       sidebar.classList.add('close');
       body.classList.add('sidebar-closed');
     }
 
     // Responsive sidebar handling
     window.addEventListener('resize', () => {
-      if (window.innerWidth < 768) {
+      if (window.innerWidth < 1024) {
         sidebar.classList.add('close');
         body.classList.add('sidebar-closed');
+        sidebar.classList.remove('active');
       } else {
         sidebar.classList.remove('close');
         body.classList.remove('sidebar-closed');
@@ -625,17 +750,33 @@ body.sidebar-closed .header {
 
     // Filter buttons functionality
     const filterButtons = document.querySelectorAll('.btn-filter');
+    const pendingGrid = document.getElementById('pending-requests');
+    const completedGrid = document.getElementById('completed-requests');
+    
     filterButtons.forEach(button => {
       button.addEventListener('click', () => {
+        // Remove active class from all buttons
         filterButtons.forEach(btn => btn.classList.remove('active'));
+        
+        // Add active class to clicked button
         button.classList.add('active');
+        
+        // Show corresponding grid
+        const filter = button.getAttribute('data-filter');
+        if (filter === 'pending') {
+          pendingGrid.style.display = 'grid';
+          completedGrid.style.display = 'none';
+        } else if (filter === 'completed') {
+          pendingGrid.style.display = 'none';
+          completedGrid.style.display = 'grid';
+        }
       });
     });
   </script>
-<!-- Load Firebase Config First -->
-<script type="module" src="firebase-config.js"></script>
-<!-- Load Collector Logic -->
-<script type="module" src="collector-side.js"></script>
-
+  
+  <!-- Load Firebase Config First -->
+  <script type="module" src="firebase-config.js"></script>
+  <!-- Load Collector Logic -->
+  <script type="module" src="collector-side.js"></script>
 </body>
 </html>
